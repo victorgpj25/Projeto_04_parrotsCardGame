@@ -2,7 +2,9 @@ function randomizer() {
     return Math.random() - 0.5; 
 }
 function startGame () {
-    const numCards = prompt("Insira o número de cartas (4 ~ 14)")
+    document.querySelector("table").innerHTML = ""
+    window.numClicks = 0
+    window.numCards = prompt("Insira o número de cartas (4 ~ 14)")
 
     if (numCards % 2 == 0 && numCards >= 4 && numCards <= 14) {
         const cards = [`<card id="bobross" onclick="selectCard(this)"><face class="back-face"><img src="content/front.png"></face><face class="front-face"><img src="content/bobrossparrot.gif" ></face></card>`, `<card id="explody" onclick="selectCard(this)"><face class="back-face"><img src="content/front.png"></face><face class="front-face"><img src="content/explodyparrot.gif" ></face></card>`, `<card id="fiesta" onclick="selectCard(this)"><face class="back-face"><img src="content/front.png"></face><face class="front-face"><img src="content/fiestaparrot.gif" ></face></card>`, `<card id="metal" onclick="selectCard(this)"><face class="back-face"><img src="content/front.png"></face><face class="front-face"><img src="content/metalparrot.gif" ></face></card>`, `<card id="revertit" onclick="selectCard(this)"><face class="back-face"><img src="content/front.png"></face><face class="front-face"><img src="content/revertitparrot.gif" ></face></card>`, `<card id="triplets" onclick="selectCard(this)"><face class="back-face"><img src="content/front.png"></face><face class="front-face"><img src="content/tripletsparrot.gif" ></face></card>`, `<card id="unicorn" onclick="selectCard(this)"><face class="back-face"><img src="content/front.png"></face><face class="front-face"><img src="content/unicornparrot.gif" ></face></card>`]
@@ -24,11 +26,15 @@ function startGame () {
 }
 startGame()
 
+function endGame () {
+    alert(`Você ganhou em ${numClicks} jogadas!`)
+}
 function selectCard (card) {
     if (card.classList.contains("correct") || card.classList.contains("selected")) {
     
     } 
     else {
+        numClicks++
         let previousCard = document.querySelector(".selected")
         card.classList.add("selected")
         if (card.id == previousCard.id) {
@@ -39,6 +45,9 @@ function selectCard (card) {
                 previousCard.classList.add("correct")
             }
             rightPair ()
+            if (document.querySelectorAll(".correct").length == numCards) {
+                setTimeout(endGame, 1000)
+            }
         } 
         else {
             function wrongPair () {
