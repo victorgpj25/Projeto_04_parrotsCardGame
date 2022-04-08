@@ -39,6 +39,7 @@ card {
     height: 146px;
     position: relative;
     margin: 0 17px 34px 17px;
+    cursor: pointer;
 }
 face {
     width: 100%;
@@ -58,12 +59,21 @@ face {
 .front-face {
     transform: rotateY(180deg);
 }
-card:hover .front-face {
-    transform: rotateY(0deg);
-}
-card:hover .back-face {
-    transform: rotateY(-180deg);
-}
 img {
     width: 100px;
+}
+.selected, .correct {
+    cursor: default;
+}
+.selected .front-face {
+    transform: rotateY(0deg);
+}
+.selected .back-face {
+    transform: rotateY(-180deg);
+}
+.correct .front-face {
+    transform: rotateY(0deg);
+}
+.correct .back-face {
+    transform: rotateY(-180deg);
 }
