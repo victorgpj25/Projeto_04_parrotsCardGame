@@ -4,6 +4,7 @@ function randomizer() {
 function startGame () {
     document.querySelector("table").innerHTML = ""
     window.numClicks = 0
+    window.timeSpent = 0
     window.numCards = prompt("Insira o número de cartas (4 ~ 14)")
 
     if (numCards % 2 == 0 && numCards >= 4 && numCards <= 14) {
@@ -23,11 +24,24 @@ function startGame () {
         alert("Só é possível jogar com um número par de cartas, com um mínimo de 4 e um máximo de 14")
         startGame()
     }
+    idInterval = setInterval(startTimer, 1000)
 }
+
+let idInterval
+
+function startTimer () {
+    timeSpent++
+    let timeSpentDisplay = ("00" + timeSpent).slice(-3)
+    document.querySelector("p").innerHTML = timeSpentDisplay
+    if (document.querySelectorAll(".correct").length == numCards || timeSpent == 999) {
+        clearInterval(idInterval)
+    }
+}
+
 startGame()
 
 function endGame () {
-    alert(`Você ganhou em ${numClicks} jogadas!`)
+    alert(`Você ganhou em ${numClicks} jogadas, em ${timeSpent} segundos!`)
     resetGame ()
 }
 function resetGame () {
@@ -74,4 +88,3 @@ function selectCard (card) {
         }
     }
 }
-
