@@ -28,6 +28,21 @@ startGame()
 
 function endGame () {
     alert(`Você ganhou em ${numClicks} jogadas!`)
+    resetGame ()
+}
+function resetGame () {
+    let answer = prompt("Gostaria de jogar novamente? (sim / não)")
+    if (answer == "sim") {
+        startGame()
+    } 
+    else if (answer == "não") {
+        alert("Obrigado por jogar!")
+    }
+    else {
+        alert("Erro na resposta")
+        resetGame ()
+    }
+
 }
 function selectCard (card) {
     if (card.classList.contains("correct") || card.classList.contains("selected")) {
