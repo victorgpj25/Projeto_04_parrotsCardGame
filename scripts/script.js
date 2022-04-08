@@ -59,7 +59,7 @@ function resetGame () {
 
 }
 function selectCard (card) {
-    if (card.classList.contains("correct") || card.classList.contains("selected")) {
+    if (card.classList.contains("correct") || card.classList.contains("selected" ) || document.querySelectorAll(".selected").length >= 2) {
     
     } 
     else {
